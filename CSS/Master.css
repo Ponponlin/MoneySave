@@ -1,0 +1,12 @@
+﻿body {
+}
+
+.container{
+    width:1000px;
+    background-color:#5dc2e2;
+    position:relative;
+}
+
+.menu-header{
+    width:1000px;
+}
