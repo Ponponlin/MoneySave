@@ -14,6 +14,7 @@
     <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
     <script type="text/javascript" src="Scripts/jquery-1.10.2.min.js"></script>
     <link rel="stylesheet" href="CSS/bootstrap.min.css" />
+    <link rel="stylesheet" href="CSS/Master.css" />
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
 
 </head>
@@ -45,21 +46,20 @@
                         <span class="icon-bar"></span>
                     </button>
                 </div>--%>
-                <div class="navbar navbar-expand bg-dark">
-                    <a class="navbar-brand" runat="server" href="~/">MoneySave</a>
+                <div class="navbar navbar-expand nav-self">
+                    <a class="navbar-brand font-weight-bold text-light" runat="server" href="~/">MoneySave</a>
                     <ul class="navbar-nav">
-                        <li><a runat="server" class="nav-link" href="~/">首頁</a></li>
-                        <li><a runat="server" class="nav-link" href="~/User/User.aspx">關於我</a></li>
-                        <li><a runat="server" class="nav-link" href="~/User/UserRecord.aspx">帳本紀錄</a></li>
-                        <li><a runat="server" class="nav-link" href="~/User/UserInvoice.aspx">統一發票紀錄</a></li>
-                        <li><a runat="server" class="nav-link" href="~/User/UserAdd.aspx">使用者新增</a></li>
+                        <li><a runat="server" class="nav-link text-white" href="~/">首頁</a></li>
+                        <li><a runat="server" class="nav-link text-white" href="~/User/User.aspx">關於我</a></li>
+                        <li><a runat="server" class="nav-link text-white" href="~/User/UserRecord.aspx">帳本紀錄</a></li>
+                        <li><a runat="server" class="nav-link text-white" href="~/User/UserInvoice.aspx">統一發票紀錄</a></li>
+                        <li><a runat="server" class="nav-link text-white" href="~/User/UserAdd.aspx">使用者新增</a></li>
                     </ul>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" class="nav-link" href="~/Account/Register">Register</a></li>
-                                <li><a runat="server" class="nav-link" id="status" href="~/Login">登入</a></li>
-                                <li><asp:LinkButton runat="server" class="nav-link" ID="Logout" Text="登出" OnClick="Logout_Click" ></asp:LinkButton></li>
+                                <li><a runat="server" class="nav-link text-white" id="status" href="~/Login">登入</a></li>
+                                <li><asp:LinkButton runat="server" class="nav-link text-white" ID="Logout" Text="登出" OnClick="Logout_Click" ></asp:LinkButton></li>
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
@@ -73,7 +73,7 @@
                     </asp:LoginView>
                 </div>
             </div>
-        </div>
+        
         <div class="container body-content">
             <asp:ContentPlaceHolder ID="MainContent" runat="server">
             </asp:ContentPlaceHolder>

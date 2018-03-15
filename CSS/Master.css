@@ -3,10 +3,15 @@
 
 .container{
     width:1000px;
-    background-color:#5dc2e2;
-    position:relative;
 }
 
-.menu-header{
+.nav-self{
     width:1000px;
+    background-color: #1fabf2;
+}
+
+a:hover{
+    position:relative;
+    top:1px;
+    left:1px;
 }
