@@ -66,7 +66,18 @@ public partial class SiteMaster : MasterPage
 
     protected void Page_Load(object sender, EventArgs e)
     {
-           
+        if (Session["UserNo"] == null)
+            Response.Redirect("~/Login.aspx");
+
+        if (Session["UserNo"] == null){
+            Login.Visible = true;
+            Logout.Visible = false;
+           }
+           else
+           {         
+           Login.Visible = false;
+           Logout.Visible = true;     
+           }
     }
 
     protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
@@ -77,6 +88,10 @@ public partial class SiteMaster : MasterPage
     protected void Logout_Click(object sender, EventArgs e)
     {
         Session.Abandon();
+        Response.Redirect("~/Default.aspx");
+    }
+    protected void Login_Click(object sender, EventArgs e)
+    {
         Response.Redirect("~/Login.aspx");
     }
 }

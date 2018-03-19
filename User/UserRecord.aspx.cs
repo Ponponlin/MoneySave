@@ -64,6 +64,7 @@ public partial class User_UserRecord : System.Web.UI.Page
         ExpenditureClassSub.Items.Add("請選擇類別");
     }
 
+    //新增按鈕
     protected void AddButton_Click(object sender, EventArgs e) 
     {
         Int32 InsertSuccess = RecordInsert();
@@ -84,6 +85,8 @@ public partial class User_UserRecord : System.Web.UI.Page
         DataView UserData = new DataView(new Search().find_table("*", "Users", "U_No = " + U_No.ToString() ));      //抓取使用者的資訊
 
         String[] Data = RecordDateStream.Value.Split(',');      //將要存入的資料切割放入陣列
+        if (Data[1] == "0")
+            Data[1] = "27";
         String RU_UserName = UserData[0]["U_Name"].ToString();
         String SQL_String = "INSERT INTO RecordUser (RU_UserNo,RU_UserName,RU_Class,RU_ClassSub,RU_Money,RU_Remarks,RU_Type,RU_CreateDate)"
                           + "VALUES (@RU_UserNo,@RU_UserName,@RU_Class,@RU_ClassSub,@RU_Money,@RU_Remarks,@RU_Type,GETDATE())";
@@ -95,7 +98,7 @@ public partial class User_UserRecord : System.Web.UI.Page
             cmd.Parameters.Add("@RU_UserNo", SqlDbType.Int).Value = U_No;
             cmd.Parameters.Add("@RU_UserName", SqlDbType.NVarChar, 20).Value = RU_UserName;
             cmd.Parameters.Add("@RU_Class", SqlDbType.NVarChar, 10).Value = Data[0].ToString();
-            cmd.Parameters.Add("@RU_ClassSub", SqlDbType.NVarChar, 10).Value = Data[1].ToString();
+            cmd.Parameters.Add("@RU_ClassSub", SqlDbType.Int).Value = Convert.ToInt32(Data[1]);
             cmd.Parameters.Add("@RU_Money", SqlDbType.Int).Value = Convert.ToInt32(Data[2]);
             cmd.Parameters.Add("@RU_Remarks", SqlDbType.NVarChar, 50).Value = Data[3].ToString();
             cmd.Parameters.Add("@RU_Type", SqlDbType.Char, 20).Value = Data[4].ToString();
@@ -131,5 +134,23 @@ public partial class User_UserRecord : System.Web.UI.Page
         StartDate.Text = DateTime.Today.ToString("yyyy/MM/01");
         Record_GridView.DataSource = new Search().search_record(StartDate.Text);
         Record_GridView.DataBind();
+    }
+
+    //將"支出"的交易呈現紅色
+    protected void Record_GridView_RowDataBound(object sender, GridViewRowEventArgs e)
+    {        
+        DataRowView oRow;
+        System.Drawing.Color oFontColor = System.Drawing.Color.Empty;
+        if(e.Row.RowType == DataControlRowType.DataRow)
+        {
+            oRow = (DataRowView)e.Row.DataItem;
+            if (oRow["RU_Type"].ToString() != "支出"){
+                oFontColor = System.Drawing.Color.Black;
+            }
+            else{
+                oFontColor = System.Drawing.Color.Red;
+            }
+            e.Row.ForeColor = oFontColor;
+        }
     }
 }

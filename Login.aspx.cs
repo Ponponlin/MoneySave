@@ -36,11 +36,11 @@ public partial class Login : System.Web.UI.Page
         }
             
     }
-
+    //驗證登入
     protected Int32 User_Login(String email, String password) 
     {
         Int32 U_No = 0;
-        String SQLString = "SELECT U_No,U_Email,U_Password "
+        String SQLString = "SELECT U_No,U_Name,U_Email,U_Password "
                          + "FROM Users "
                          + "WHERE U_Email = @U_Email AND U_Password = @U_Password";
 

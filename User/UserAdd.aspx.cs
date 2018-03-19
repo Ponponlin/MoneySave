@@ -16,7 +16,8 @@ public partial class User_UserAdd : System.Web.UI.Page
     Common cc = new Common();
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        if (Session["UserNo"] == null)
+            Response.Redirect("~/Login.aspx");
     }
     //送出申請
     protected void submit_Click(object sender, EventArgs e)

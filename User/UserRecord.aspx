@@ -13,11 +13,11 @@
     </div>
     <br />
 
-        <asp:GridView ID="Record_GridView" runat="server" AutoGenerateColumns="False">
+        <asp:GridView ID="Record_GridView" runat="server" OnRowDataBound="Record_GridView_RowDataBound" AutoGenerateColumns="False" SelectedRowStyle-BackColor="#666699" HeaderStyle-BackColor="#C4D9F0">
             <Columns>
                 <asp:BoundField DataField="RU_UserName" HeaderText="紀錄者" SortExpression="RU_UserName"></asp:BoundField>
                 <asp:BoundField DataField="RU_Class" HeaderText="類別" SortExpression="RU_Class"></asp:BoundField>
-                <asp:BoundField DataField="RU_ClassSub" HeaderText="細項類別" SortExpression="RU_ClassSub"></asp:BoundField>
+                <asp:BoundField DataField="RS_Name" HeaderText="細項類別" SortExpression="RS_Name"></asp:BoundField>
                 <asp:BoundField DataField="RU_Money" HeaderText="金額" SortExpression="RU_Money"></asp:BoundField>
                 <asp:BoundField DataField="RU_Type" HeaderText="收支" SortExpression="RU_Type"></asp:BoundField>
                 <asp:BoundField DataField="RU_CreateDate" HeaderText="日期" SortExpression="RU_CreateDate" DataFormatString="{0:d}"></asp:BoundField>

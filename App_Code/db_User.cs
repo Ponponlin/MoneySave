@@ -43,7 +43,7 @@ public class db_User
         }
         catch (Exception ex) 
         {
-            cc.showMsg(thispage, ex.Message);
+            
         }
         finally 
         {

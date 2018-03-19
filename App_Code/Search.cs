@@ -60,7 +60,7 @@ public class Search
     public DataTable search_record(String startdate, String enddate) 
     {
         SqlConnection conn = new SqlConnection(connString);
-        string SQL_String = "select RU_UserName,RU_Class,RU_ClassSub,RU_Money,RU_CreateDate,RU_Type from RecordUser where RU_CreateDate >= " +"'"+startdate+"'" + " and RU_CreateDate <= DATEADD(day,1,"+"'"+enddate+"'"+")order by RU_CreateDate DESC";
+        string SQL_String = "select RU_UserName,RU_Class,RS_Name,RU_Money,RU_CreateDate,RU_Type from RecordUser inner join RecordSub on RU_CreateDate >= " +"'"+startdate+"'" + " and RU_CreateDate <= DATEADD(day,1,"+"'"+enddate+"'"+") and RU_ClassSub = RS_No order by RU_CreateDate DESC";
         SqlDataReader reader = null;
         DataTable RecordTable = new DataTable();
         try
@@ -85,7 +85,9 @@ public class Search
     public DataTable search_record(String startdate)
     {
         SqlConnection conn = new SqlConnection(connString);
-        string SQL_String = "select RU_UserName,RU_Class,RU_ClassSub,RU_Money,RU_CreateDate,RU_Type from RecordUser where RU_CreateDate >= " + "'" + startdate +"'" + "order by RU_CreateDate DESC";
+        //string SQL_String = "select RU_UserName,RU_Class,RU_ClassSub,RU_Money,RU_CreateDate,RU_Type from RecordUser where RU_CreateDate >= " + "'" + startdate +"'" + "order by RU_CreateDate DESC";
+        string SQL_String = "select RU_UserName,RU_Class,RecordSub.RS_Name,RU_Money,RU_CreateDate,RU_Type from RecordUser inner join RecordSub on RU_CreateDate >= " + "'" + startdate + "'" + " and RU_ClassSub = RS_No order by RU_CreateDate DESC";
+
         SqlDataReader reader = null;
         DataTable RecordTable = new DataTable();
         try
