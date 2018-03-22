@@ -88,8 +88,12 @@ public partial class User_UserRecord : System.Web.UI.Page
         if (Data[1] == "0")
             Data[1] = "27";
         String RU_UserName = UserData[0]["U_Name"].ToString();
+        //String SQL_String = "INSERT INTO RecordUser (RU_UserNo,RU_UserName,RU_Class,RU_ClassSub,RU_Money,RU_Remarks,RU_Type,RU_CreateDate)"
+        //                  + "VALUES (@RU_UserNo,@RU_UserName,@RU_Class,@RU_ClassSub,@RU_Money,@RU_Remarks,@RU_Type,GETDATE())";
+
         String SQL_String = "INSERT INTO RecordUser (RU_UserNo,RU_UserName,RU_Class,RU_ClassSub,RU_Money,RU_Remarks,RU_Type,RU_CreateDate)"
-                          + "VALUES (@RU_UserNo,@RU_UserName,@RU_Class,@RU_ClassSub,@RU_Money,@RU_Remarks,@RU_Type,GETDATE())";
+                          + "VALUES (@RU_UserNo,@RU_UserName,@RU_Class,@RU_ClassSub,@RU_Money,@RU_Remarks,@RU_Type,@RU_CreateDate)";
+
 
         SqlConnection conn = new SqlConnection(connString);
         try 
@@ -102,6 +106,7 @@ public partial class User_UserRecord : System.Web.UI.Page
             cmd.Parameters.Add("@RU_Money", SqlDbType.Int).Value = Convert.ToInt32(Data[2]);
             cmd.Parameters.Add("@RU_Remarks", SqlDbType.NVarChar, 50).Value = Data[3].ToString();
             cmd.Parameters.Add("@RU_Type", SqlDbType.Char, 20).Value = Data[4].ToString();
+            cmd.Parameters.Add("@RU_CreateDate", SqlDbType.Date).Value = Data[5].ToString();
 
             conn.Open();
             RU_No = Convert.ToInt32(cmd.ExecuteNonQuery());

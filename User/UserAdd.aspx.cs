@@ -34,10 +34,15 @@ public partial class User_UserAdd : System.Web.UI.Page
         else if (female.Checked)
             sex = "0";
 
-        if (UserInsert(Name, Email, Password, sex, Title, Phone))
-            cc.showMsg(this.Page, "建立成功!");
+        if (Email != "" || Password != "" || Name != "")
+        {
+            if (UserInsert(Name, Email, Password, sex, Title, Phone))
+                cc.showMsg(this.Page, "建立成功!");
+            else
+                cc.showMsg(this.Page, "建立失敗!");
+        }
         else
-            cc.showMsg(this.Page, "建立失敗!");
+            cc.showMsg(this.Page, "請至少輸入電子信箱、密碼、姓名及性別");
     }
     /*新增使用者
      Group變數尚未完成設定

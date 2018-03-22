@@ -25,9 +25,9 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col"></div>
-                            <div class="col-5">
+                            <div class="col-3">
                                 <asp:Button runat="server" CssClass="btn btn-primary" ID="login" OnClick="login_Click" Text="登入" />
-                                <asp:Button runat="server" CssClass="btn btn-success" text="註冊"/>
+                                <%--<asp:Button runat="server" CssClass="btn btn-success" Visible="false" text="註冊"/>--%>
                             </div>
                             <div class="col"></div>
                         </div>

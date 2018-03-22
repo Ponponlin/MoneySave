@@ -7,7 +7,7 @@
         <asp:TextBox runat="server" TextMode="Date" ID="EndDate"></asp:TextBox>
         <asp:Button runat="server" CssClass="btn btn-primary" Text="查詢" ID="TimeSearch" OnClick="TimeSearch_Click" />
     </div>
-    <div class="btn-group">
+    <div class="btn-group-toggle">
         <asp:Button runat="server" UseSubmitBehavior="false" CssClass="btn btn-primary" ID="AddIncome" Text="新增收入" OnClientClick="openInCome();return false;" data-toggle="modal" data-target="#incomedialog"/>
         <asp:Button runat="server" UseSubmitBehavior="false" ID="AddExpenditure" CssClass="btn" Text="新增支出" OnClientClick="openExpenditure();return false;" data-toggle="modal" data-target="#ExpenditureDialog" />
     </div>
@@ -32,6 +32,10 @@
                     新增收入
                 </div>
                 <div class="modal-body" id="InComeBody">
+                    <div class="col p-1">
+                        <asp:Label runat="server" Text="請輸入日期"></asp:Label>
+                        <asp:TextBox runat="server" ID="InComeDate" TextMode="Date" Width="150px"></asp:TextBox>
+                    </div>
                     <div class="col p-1">
                     <asp:Label runat="server">收入類別：</asp:Label>
                         <asp:DropDownList runat="server" ID="InComeClass" Width="150px" Height="25px">
@@ -70,6 +74,10 @@
                     新增支出
                 </div>
                 <div class="modal-body">
+                    <div class="col p-1">
+                        <asp:Label runat="server" Text="請輸入日期"></asp:Label>
+                        <asp:TextBox runat="server" ID="ExpenditureDate" TextMode="Date" Width="150px"></asp:TextBox>
+                    </div>
                     <asp:UpdatePanel runat="server" ID="updatepanel1" UpdateMode="Conditional">
                         <ContentTemplate>
                             <div class="col p-1">
@@ -88,11 +96,11 @@
                     </asp:UpdatePanel>
                     <div class="col p-1">                               
                         <asp:Label runat="server">請輸入數字：</asp:Label>
-                        <asp:TextBox runat="server" TextMode="Number" ID="ExpenditureNumber" Width="100px" Height="25px"></asp:TextBox>
+                        <asp:TextBox runat="server" TextMode="Number" ID="ExpenditureNumber" Width="133px" Height="25px"></asp:TextBox>
                     </div>
                     <div class="col p-1">       
                         <asp:Label runat="server">附註：</asp:Label>
-                        <asp:TextBox runat="server" ID="ExpenditureDetail" TextMode="MultiLine" Width="150px" Height="30px"></asp:TextBox>
+                        <asp:TextBox runat="server" ID="ExpenditureDetail" TextMode="MultiLine" Width="180px" Height="50px"></asp:TextBox>
                     </div>        
                     <div class="modal-footer">
                         <asp:Button runat="server" CssClass="btn btn-success" ID="ExpendAdd" OnClick="AddButton_Click" OnClientClick="setRecordDataStream('ExpendBody');" Text="新增" />
@@ -146,6 +154,7 @@
             var ClassSub;
             var Money;
             var Detail;
+            var CreateDate;
             var getDialog = document.getElementById(bodyname);
             
             if (bodyname == "InComeBody")
@@ -155,6 +164,7 @@
                 Money = document.getElementById('<%= InComeNumber.ClientID%>').value;
                 Detail = document.getElementById('<%= InComeDetail.ClientID%>').value;
                 type = "收入";
+                CreateDate = document.getElementById('<%= InComeDate.ClientID%>').value;
             }
             else {
                 Class = document.getElementById('<%= ExpenditureClass.ClientID %>').value;
@@ -162,8 +172,9 @@
                 Money = document.getElementById('<%= ExpenditureNumber.ClientID%>').value;
                 Detail = document.getElementById('<%= ExpenditureDetail.ClientID%>').value;
                 type = "支出";
+                CreateDate = document.getElementById('<%= ExpenditureDate.ClientID%>').value;
             }
-            dataString = Class+","+ClassSub+","+Money+","+Detail+","+type;
+            dataString = Class+","+ClassSub+","+Money+","+Detail+","+type+","+CreateDate;
             document.getElementById('<%= RecordDateStream.ClientID%>').value = dataString;
         }
 

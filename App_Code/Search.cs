@@ -24,10 +24,6 @@ public class Search
 
     public DataTable find_table(String cellname,String tablename,String searchstring) 
     {
-        //String SQL_String = "SELECT @CELLNAME "
-        //                  + " FROM @TABLENAME "
-        //                  + " WHERE @SEARCHSTRING";
-
         String SQL_String = " SELECT " + cellname
                           + " FROM " + tablename
                           + " WHERE " + searchstring;
@@ -38,9 +34,6 @@ public class Search
         try 
         {
             SqlCommand cmd = new SqlCommand(SQL_String, conn);
-            //cmd.Parameters.Add("@CELLNAME", SqlDbType.VarChar, 10).Value = cellname;
-            //cmd.Parameters.Add("@TABLENAME", SqlDbType.VarChar, 10).Value = tablename;
-            //cmd.Parameters.Add("@SEARCHSTRING", SqlDbType.VarChar, 255).Value = searchstring;
             conn.Open();
             reader = cmd.ExecuteReader();
             UserTable.Load(reader);
