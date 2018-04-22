@@ -78,11 +78,11 @@
                         <asp:Label runat="server" Text="請輸入日期"></asp:Label>
                         <asp:TextBox runat="server" ID="ExpenditureDate" TextMode="Date" Width="150px"></asp:TextBox>
                     </div>
-                    <asp:UpdatePanel runat="server" ID="updatepanel1" UpdateMode="Conditional">
-                        <ContentTemplate>
+                   <%-- <asp:UpdatePanel runat="server" ID="updatepanel1" UpdateMode="Conditional">
+                        <ContentTemplate>--%>
                             <div class="col p-1">
                                 <asp:Label runat="server">支出類別：</asp:Label>
-                                <asp:DropDownList runat="server" ID="ExpenditureClass" OnSelectedIndexChanged="ExpenditureClass_SelectedIndexChanged" Width="150px" Height="25px" AutoPostBack="True">                       
+                                <asp:DropDownList runat="server" ID="ExpenditureClass" onchange= "chSelectValue(this);" Width="150px" Height="25px" AutoPostBack="True">                       
                                     <asp:ListItem Text="請選擇類別" Value="0" Selected="True"></asp:ListItem>
                                 </asp:DropDownList>                   
                             </div>                   
@@ -92,8 +92,8 @@
                                     <asp:ListItem Text="請先選取總類別" Value="0" Selected="True"></asp:ListItem>
                                 </asp:DropDownList>
                             </div>
-                        </ContentTemplate>
-                    </asp:UpdatePanel>
+                        <%--</ContentTemplate>
+                    </asp:UpdatePanel>--%>
                     <div class="col p-1">                               
                         <asp:Label runat="server">請輸入數字：</asp:Label>
                         <asp:TextBox runat="server" TextMode="Number" ID="ExpenditureNumber" Width="133px" Height="25px"></asp:TextBox>
@@ -147,6 +147,40 @@
             expendituredialog.close();
         }
 */
+        function chSelectValue(control) {
+            var selectValue = $("#" + control.id).val();
+            var jsonValue = JSON.stringify({ "Value":selectValue});
+            var controllist = document.getElementById('<%=ExpenditureClassSub.ClientID%>');
+            console.log(jsonValue);
+            $.ajax({
+                url: "UserRecordajax.aspx",
+                type: "get",
+                data: "Value=" + selectValue,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                async: false,
+                success: function (result) {
+                    console.log(result);
+                    if (result != null) {
+                        /*$.each(result.No, function (i, value) {
+                            $("#ExpenditureClassSub").append($("<option></option>").attr("value",value.No).text(value.Name));
+                        })*/
+                        var listitem = "";
+                        for (var i = 0; i < result.length; i++) {
+                            listitem += "<option value='" + result[i].No + "'>" + result[i].Name + "</option>";
+                        }
+                        $("#ExpenditureClassSub").html(listitem);
+                    }
+                },
+                error: function () {
+                    console.log("fail");
+                }
+            })
+        }
+
+
+
+
         function setRecordDataStream(bodyname) {
             var dataString = "";
             var type = "";
